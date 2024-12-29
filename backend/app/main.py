@@ -117,6 +117,6 @@ async def get_recommendations(access_token: str = Depends(oauth2_scheme), genres
     return await fetch_recommendations(access_token, genres_list, start_year, end_year, limit, language, popularity)
 
 @app.post("/create-list")
-async def create_list(access_token: str = Depends(oauth2_scheme), name: str, description: str, items: list[int]):
+async def create_list(name: str, description: str, items: list[int], access_token: str = Depends(oauth2_scheme)):
     list_id = await create_trakt_list(access_token, name, description, items)
     return {"status": "success", "list_id": list_id}
