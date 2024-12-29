@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.security import OAuth2AuthorizationCodeBearer
 import requests
 from apscheduler.schedulers.background import BackgroundScheduler
 
@@ -17,6 +18,9 @@ app.add_middleware(
 TRAKT_CLIENT_ID = "your_trakt_client_id"
 TRAKT_CLIENT_SECRET = "your_trakt_client_secret"
 REDIRECT_URI = "http://localhost:3000/auth/callback"
+
+# OAuth2 scheme
+oauth2_scheme = OAuth2AuthorizationCodeBearer(tokenUrl="token")
 
 # Store access tokens (in-memory for simplicity)
 access_tokens = {}
